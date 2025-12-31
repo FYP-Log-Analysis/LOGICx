@@ -1,9 +1,9 @@
 from fastapi import APIRouter
-from services.pipeline_service import (
-    run_pipeline, 
-    get_pipeline_steps, 
+from api.services.pipeline_service import (
+    run_pipeline,
+    get_pipeline_steps,
     run_step,
-    run_steps_in_sequence
+    run_steps_in_sequence,
 )
 
 router = APIRouter()

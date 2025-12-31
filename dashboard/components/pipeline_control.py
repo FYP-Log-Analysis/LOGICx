@@ -3,13 +3,14 @@ Pipeline Control page for the LOGIC dashboard.
 Provides comprehensive manual pipeline execution and status monitoring.
 """
 
+import os
 import streamlit as st
 import requests
 import json
 from datetime import datetime
 
 
-API_BASE_URL = "http://localhost:4000/api/pipeline"
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:4000/api/pipeline")
 
 
 def get_pipeline_steps():

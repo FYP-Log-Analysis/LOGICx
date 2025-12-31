@@ -4,7 +4,7 @@ Analysis routes for threat intelligence and LLM-based insights.
 
 from fastapi import APIRouter, HTTPException
 from typing import Dict, Optional, List
-from services.llm_service import analyze_detection_results, analyze_specific_match
+from api.services.llm_service import analyze_detection_results, analyze_specific_match
 import json
 import os
 import logging

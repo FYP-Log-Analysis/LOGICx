@@ -9,8 +9,8 @@ import os
 import requests
 from services.data_service import load_sigma_rules
 
-API_BASE_URL = "http://localhost:4000/api/pipeline"
-ANALYSIS_API_URL = "http://localhost:4000/api/analysis"
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:4000/api/pipeline")
+ANALYSIS_API_URL = os.getenv("ANALYSIS_API_URL", "http://localhost:4000/api/analysis")
 
 
 def load_sigma_detection_output():

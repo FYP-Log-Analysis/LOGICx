@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import pipeline, upload, analysis
+from api.routes import pipeline, upload, analysis
 
 # Create the FastAPI application
 app = FastAPI(

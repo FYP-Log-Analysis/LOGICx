@@ -5,7 +5,7 @@ import zipfile
 import tempfile
 import shutil
 from pathlib import Path
-from services.pipeline_service import run_pipeline
+from api.services.pipeline_service import run_pipeline
 
 router = APIRouter()
 
