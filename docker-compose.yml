@@ -10,6 +10,21 @@ services:
       - ./data:/app/data
     depends_on:
       - db
+  
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: fyp-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data:ro
+      - ./dashboard:/app
+    depends_on:
+      - api
+    environment:
+      - API_BASE_URL=http://api:4000
   db:
     image: postgres:15
     container_name: fyp_postgres

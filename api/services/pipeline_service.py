@@ -22,18 +22,8 @@ def run_pipeline():
         # Step 3: Normalize the JSON data  
         "normalizer/src/normalize.py",
         
-        # Step 4: Load normalized data to database
-        "api/scripts/ingest_normalized.py",
-        
-        # Step 5: Filter and preprocess events
-        "analysis/preprocessing/event_filter.py",
-        "analysis/preprocessing/window_aggregation.py",
-        
-        # Step 6: Extract features for ML
-        "analysis/feature_engineering/feature_extraction.py",
-        
-        # Step 7: Run anomaly detection
-        "analysis/detection/isolation_forest.py"
+        # Step 4: Run Sigma analysis
+        "analysis/sigma_pipeline.py"
     ]
 
     results = []
