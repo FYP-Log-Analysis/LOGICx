@@ -1,0 +1,50 @@
+# Environment Variables
+.env
+.env.local
+.env*.local
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.egg
+.Python
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Project-specific
+data/raw_logs/*.evtx
+data/processed/**/*.json
+data/processed/**/*.xml
+data/detection_results/**
+data/features/**
+data/intermediate/**
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Cache
+.cache/
+*.cache

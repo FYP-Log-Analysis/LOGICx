@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import pipeline, upload
+from routes import pipeline, upload, analysis
 
 # Create the FastAPI application
 app = FastAPI(
@@ -11,6 +11,7 @@ app = FastAPI(
 # Include routes
 app.include_router(pipeline.router, prefix="/api/pipeline")
 app.include_router(upload.router, prefix="/api")
+app.include_router(analysis.router, prefix="/api/analysis")
 
 @app.get("/")
 def root():

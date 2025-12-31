@@ -1,0 +1,30 @@
+# LOGIC - Log Intelligence and Correlation Toolkit
+
+# ==========================================
+# Core Analysis & Processing
+# ==========================================
+# Event log parsing and processing
+evtx>=0.7.0
+xmltodict>=0.13.0
+
+# Sigma rule detection
+pysigma>=0.10.0
+pysigma-backend-sigma>=0.1.0
+
+# Machine learning for anomaly detection
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# ==========================================
+# API Backend
+# ==========================================
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# ==========================================
+# LLM Integration
+# ==========================================
+groq>=0.4.1
+
+# ==========================================

@@ -9,6 +9,17 @@ from services.data_service import load_log_statistics
 from utils.helpers import create_suspicious_indicator
 
 
+def get_display_name(log_name):
+    """Convert log name to display-friendly name"""
+    name_mapping = {
+        'PowerShell_Operational': 'PowerShell',
+        'Security': 'Security',
+        'System': 'System',
+        'Application': 'Application'
+    }
+    return name_mapping.get(log_name, log_name)
+
+
 def render_log_statistics():
     """Render the log statistics page"""
     st.header("Log Analysis Statistics")
@@ -43,7 +54,8 @@ def render_log_statistics():
         cols = st.columns(min(len(stats), 4))
         for i, (log_name, log_info) in enumerate(stats.items()):
             with cols[i % 4]:
-                if st.button(f"{log_name}\n({log_info['events']:,} events)", 
+                display_name = get_display_name(log_name)
+                if st.button(f"{display_name}\n({log_info['events']:,} events)", 
                            key=f"log_{log_name}", 
                            use_container_width=True):
                     st.session_state.selected_log = log_name
@@ -52,8 +64,9 @@ def render_log_statistics():
         if st.session_state.selected_log and st.session_state.selected_log in stats:
             selected_log = st.session_state.selected_log
             log_data = stats[selected_log]['data']
+            display_name = get_display_name(selected_log)
             
-            st.subheader(f"{selected_log} Log Data")
+            st.subheader(f"{display_name} Log Data")
             
             # Log info
             col1, col2 = st.columns(2)
