@@ -1,26 +1,82 @@
-# LOGIC - Single-Container Deployment
+# LOGIC - Local Development and Production Run Guide
 
-This project packages FastAPI (backend) and Streamlit (frontend) behind Nginx in one container.
+LOGIC is a Windows log forensics project with:
+- FastAPI backend on port 4000
+- Streamlit dashboard on port 8501
+- Data processing and detection pipelines
 
-## Build
+## Prerequisites
+
+- Python 3.9+
+- pip
+- Optional: PostgreSQL (only if your API/database workflows require it)
+
+## Install Dependencies
+
+From the project root:
+
+```bash
+pip install -r requirements.txt
 ```
-docker build -t logic-all-in-one .
+
+## Environment Variables
+
+Create or update `.env` in the project root.
+
+Required/commonly used values:
+
+```env
+GROQ_API_KEY=your_key_here
+API_BASE_URL=http://localhost:4000
+ANALYSIS_API_URL=http://localhost:4000/api/analysis
+DATABASE_URL=postgresql://forensic:forensicpass@localhost:5432/fyp
 ```
 
-## Run
-```
-docker run \
-	-p 80:80 \
-	--env-file .env \
-	-e API_BASE_URL=http://localhost:8000/api/pipeline \
-	-e ANALYSIS_API_URL=http://localhost:8000/api/analysis \
-	logic-all-in-one
+## Run Scripts
+
+Two launcher scripts are provided:
+
+- `dev.sh`: starts API (with `--reload`) and dashboard for development
+- `prod.sh`: starts API and dashboard without reload
+
+Make scripts executable once:
+
+```bash
+chmod +x dev.sh prod.sh
 ```
 
-- UI: http://localhost
-- API: http://localhost/api/
+Start development mode:
 
-## Notes
-- Nginx proxies `/api/` to uvicorn on 8000 and `/` to Streamlit on 8501.
-- Set `GROQ_API_KEY` (and other envs) in `.env` before running.
-- To persist data: `-v $(pwd)/data:/app/data`.
+```bash
+./dev.sh
+```
+
+Start production mode:
+
+```bash
+./prod.sh
+```
+
+## Service URLs
+
+- Dashboard: http://localhost:8501
+- API root: http://localhost:4000/
+- API docs: http://localhost:4000/docs
+
+## Optional Pipeline Commands
+
+Run steps manually from project root:
+
+```bash
+python ingestion/src/ingest_evtx.py
+python parser/src/parse_xml.py
+python -m normalizer.src.normalize
+python analysis/sigma_pipeline.py
+python ml/ml_pipeline.py
+```
+
+## Troubleshooting
+
+- If `streamlit` or `uvicorn` is not found, activate your virtual environment and reinstall dependencies.
+- If port 4000 or 8501 is already in use, stop the conflicting process and rerun the script.
+- If dashboard API checks fail, verify the backend is running at `http://localhost:4000`.

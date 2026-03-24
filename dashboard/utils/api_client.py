@@ -1,11 +1,14 @@
 import streamlit as st
 import requests
 import json
+import os
+
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:4000")
 
 def run_pipeline():
     """Trigger the pipeline via API"""
     try:
-        response = requests.post("http://api:4000/api/pipeline/run")
+        response = requests.post(f"{API_BASE_URL}/api/pipeline/run")
         if response.status_code == 200:
             return response.json()
         else:
@@ -16,7 +19,7 @@ def run_pipeline():
 def get_api_status():
     """Check if the API is accessible"""
     try:
-        response = requests.get("http://api:4000/", timeout=5)
+        response = requests.get(f"{API_BASE_URL}/", timeout=5)
         return response.status_code == 200
     except:
         return False

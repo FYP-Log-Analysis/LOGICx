@@ -31,14 +31,6 @@ A **Streamlit-based dashboard** for the LOGIC log analysis and threat detection 
 
 ## Quick Start
 
-### Using Docker (Recommended)
-```bash
-# Build and start the dashboard
-docker-compose up -d dashboard
-
-# Access at http://localhost:8501
-```
-
 ### Local Development
 ```bash
 # Install dependencies
@@ -46,6 +38,12 @@ pip install -r requirements.txt
 
 # Run the dashboard
 streamlit run main.py
+```
+
+Or from the project root, run both backend and dashboard together:
+
+```bash
+./dev.sh
 ```
 
 ## Architecture
@@ -60,7 +58,6 @@ dashboard/
 │   └── api_client.py      # API communication
 ├── .streamlit/            # Streamlit configuration
 │   └── config.toml        # Dashboard theme and settings
-├── Dockerfile             # Container configuration
 └── requirements.txt       # Python dependencies
 ```
 
